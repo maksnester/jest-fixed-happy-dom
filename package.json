@@ -1,6 +1,6 @@
 {
   "name": "jest-fixed-happy-dom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A superset of the happy-dom environment for Jest that respects Node.js globals.",
   "main": "./index.js",
   "scripts": {

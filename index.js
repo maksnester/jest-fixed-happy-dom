@@ -1,39 +1,30 @@
-const JSDOMEnvironment = require('jest-environment-jsdom').default
+const HappyDomEnvironment = require('@happy-dom/jest-environment').default
 
-class FixedJSDOMEnvironment extends JSDOMEnvironment {
+// same as https://github.com/mswjs/jest-fixed-jsdom package does but for happy-dom
+class FixedHappyDomEnvironment extends HappyDomEnvironment {
   constructor(...args) {
-    super(...args)
+    super(...args);
 
-    /**
-     * @note Opt-out from JSDOM using browser-style resolution
-     * for dependencies. This is simply incorrect, as JSDOM is
-     * not a browser, and loading browser-oriented bundles in
-     * Node.js will break things.
-     *
-     * Consider migrating to a more modern test runner if you
-     * don't want to deal with this.
-     */
-    this.customExportConditions = args.customExportConditions || ['']
+    this.global.TextDecoder = TextDecoder;
+    this.global.TextEncoder = TextEncoder;
+    this.global.TextDecoderStream = TextDecoderStream;
+    this.global.TextEncoderStream = TextEncoderStream;
+    this.global.ReadableStream = ReadableStream;
 
-    this.global.TextDecoder = TextDecoder
-    this.global.TextEncoder = TextEncoder
-    this.global.TextDecoderStream = TextDecoderStream
-    this.global.TextEncoderStream = TextEncoderStream
-    this.global.ReadableStream = ReadableStream
+    this.global.Blob = Blob;
+    this.global.Headers = Headers;
+    this.global.FormData = FormData;
+    this.global.Request = Request;
+    this.global.Response = Response;
+    this.global.fetch = fetch;
+    this.global.structuredClone = structuredClone;
+    this.global.URL = URL;
+    this.global.URLSearchParams = URLSearchParams;
 
-    this.global.Blob = Blob
-    this.global.Headers = Headers
-    this.global.FormData = FormData
-    this.global.Request = Request
-    this.global.Response = Response
-    this.global.fetch = fetch
-    this.global.structuredClone = structuredClone
-    this.global.URL = URL
-    this.global.URLSearchParams = URLSearchParams
-
-    this.global.BroadcastChannel = BroadcastChannel
-    this.global.TransformStream = TransformStream
+    this.global.BroadcastChannel = BroadcastChannel;
+    this.global.TransformStream = TransformStream;
   }
 }
 
-module.exports = FixedJSDOMEnvironment
+
+module.exports = FixedHappyDomEnvironment

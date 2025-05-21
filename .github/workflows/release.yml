@@ -28,8 +28,8 @@ jobs:
 
       - name: Setup Git
         run: |
-          git config --local user.name "Artem Zakharchenko"
-          git config --local user.email "kettanaito@gmail.com"
+          git config --local user.name "Maksim Nesterenko"
+          git config --local user.email "alendorff@gmail.com"
 
       - name: Install dependencies
         run: pnpm install
